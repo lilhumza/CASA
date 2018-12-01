@@ -1,4 +1,5 @@
 <?php
+//Acessing Database to Input LAT LNG Values
 $servername = "localhost";
 $username = "id5480653_humzasqldatabase";
 $password = "humzarocks";
@@ -20,12 +21,7 @@ $sql = "INSERT INTO casalatlng (lat, lng)
 VALUES ('$lati', '$lngi')";
 
 if ($conn->query($sql) === TRUE) {
-    //echo "New record created successfully";
 } 
-// else {
-//     echo "Error: " . $sql . "<br>" . $conn->error;
-// }
-
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -58,292 +54,282 @@ $conn->close();
             margin: 4px 4px 4px 4px;
             padding: 0;
             background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/grit-fs8.png), radial-gradient(ellipse farthest-corner, #555, #999);
-            /* background-image: url("bumpty.jpg");
-            height: 100%; 
-            /* Center and scale the image nicely */
-            /* background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover; */ 
         }
-        #floating-panel {
-            position: absolute fixed;
-            top: 15px;
-            left: 4.65%;
-            z-index: 5;
-            /* background-color: #999; */
-            padding: 5px;
-            border: 1px solid white;
-            text-align: center;
-            font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-        }
-        .btn-glass {
-  flex-grow: 1;
-  text-align: center;
-  display: inline-block;
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  padding: 1em 2em;
-  font-family: Lato;
-  font-weight: 300;
-  border: 1px dotted transparent;
-  letter-spacing: 0.98pt;
-  text-transform: uppercase;
-  transition: background-position 2s cubic-bezier(0, 1, 0, 1), border-color 500ms, background-color 500ms;
-  position: relative;
-  background-attachment: fixed, scroll;
-  background-size: 100vw 100vh, cover;
-  background-position: center center, 0 0;
-  background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0.075) 10%, rgba(255, 255, 255, 0.075) 14%, rgba(255, 255, 255, 0.15) 14%, rgba(255, 255, 255, 0.15) 15%, rgba(255, 255, 255, 0.075) 17%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.075) 40%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0) 43%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.075) 60%, rgba(255, 255, 255, 0.075) 66%, rgba(255, 255, 255, 0.15) 66%, rgba(255, 255, 255, 0.075) 70%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%), radial-gradient(ellipse farthest-corner, transparent, rgba(0, 0, 0, 0.2) 110%);
-}
-.btn-glass:hover {
-  background-position: -100vw 0, 0 0;
-}
-.btn-glass:active {
-  background-position: -75vw 0, 0 0;
-  border-style: solid;
-}
-.nav-light {
-  background-color: white;
-}
-.nav-light .btn-glass {
-  color: #585858;
-  background-color: rgba(17, 17, 17, 0);
-}
-.nav-light .btn-glass:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #000000;
-  background-color: #111111;
-}
-.nav-light .btn-glass:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(17, 17, 17, 0.5);
-}
-.nav-light .btn-glass.btn-primary {
-  color: #6ab1d1;
-  background-color: rgba(42, 143, 189, 0);
-}
-.nav-light .btn-glass.btn-primary:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #1c607e;
-  background-color: #2A8FBD;
-}
-.nav-light .btn-glass.btn-primary:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(42, 143, 189, 0.5);
-}
-.nav-light .btn-glass.btn-success {
-  color: #a5c75f;
-  background-color: rgba(127, 175, 27, 0);
-}
-.nav-light .btn-glass.btn-success:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #4f6d11;
-  background-color: #7FAF1B;
-}
-.nav-light .btn-glass.btn-success:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(127, 175, 27, 0.5);
-}
-.nav-light .btn-glass.btn-warning {
-  color: #fccd69;
-  background-color: rgba(251, 184, 41, 0);
-}
-.nav-light .btn-glass.btn-warning:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #d49104;
-  background-color: #FBB829;
-}
-.nav-light .btn-glass.btn-warning:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(251, 184, 41, 0.5);
-}
-.nav-light .btn-glass.btn-danger {
-  color: #f56558;
-  background-color: rgba(240, 35, 17, 0);
-}
-.nav-light .btn-glass.btn-danger:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #aa180b;
-  background-color: #F02311;
-}
-.nav-light .btn-glass.btn-danger:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(240, 35, 17, 0.5);
-}
-.nav-light .btn-glass.btn-info {
-  color: #98e9f0;
-  background-color: rgba(108, 223, 234, 0);
-}
-.nav-light .btn-glass.btn-info:hover {
-  color: rgba(255, 255, 255, 0.7);
-  border-color: #29d0e0;
-  background-color: #6CDFEA;
-}
-.nav-light .btn-glass.btn-info:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(108, 223, 234, 0.5);
-}
-.nav-dark {
-  background-color: #444;
-}
-.nav-dark .btn-glass {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(17, 17, 17, 0);
-}
-.nav-dark .btn-glass:hover {
-  border-color: #000000;
-  background-color: #111111;
-}
-.nav-dark .btn-glass:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(17, 17, 17, 0.5);
-}
-.nav-dark .btn-glass.btn-primary {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(42, 143, 189, 0);
-}
-.nav-dark .btn-glass.btn-primary:hover {
-  border-color: #1c607e;
-  background-color: #2A8FBD;
-}
-.nav-dark .btn-glass.btn-primary:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(42, 143, 189, 0.5);
-}
-.nav-dark .btn-glass.btn-success {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(127, 175, 27, 0);
-}
-.nav-dark .btn-glass.btn-success:hover {
-  border-color: #4f6d11;
-  background-color: #7FAF1B;
-}
-.nav-dark .btn-glass.btn-success:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(127, 175, 27, 0.5);
-}
-.nav-dark .btn-glass.btn-warning {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(251, 184, 41, 0);
-}
-.nav-dark .btn-glass.btn-warning:hover {
-  border-color: #d49104;
-  background-color: #FBB829;
-}
-.nav-dark .btn-glass.btn-warning:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(251, 184, 41, 0.5);
-}
-.nav-dark .btn-glass.btn-danger {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(240, 35, 17, 0);
-}
-.nav-dark .btn-glass.btn-danger:hover {
-  border-color: #aa180b;
-  background-color: #F02311;
-}
-.nav-dark .btn-glass.btn-danger:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(240, 35, 17, 0.5);
-}
-.nav-dark .btn-glass.btn-info {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(108, 223, 234, 0);
-}
-.nav-dark .btn-glass.btn-info:hover {
-  border-color: #29d0e0;
-  background-color: #6CDFEA;
-}
-.nav-dark .btn-glass.btn-info:active {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1em 0.5ex rgba(108, 223, 234, 0.5);
-}
-nav.btn-bar {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-:root {
-  font-family: 'Open Sans', sans;
-  font-size: 11pt;
-  line-height: 1.6;
-  min-height: 100vh;
-  /* background-attachment: fixed, scroll; */
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/grit-fs8.png), radial-gradient(ellipse farthest-corner, #555, #999);
-}
-/* body {
-  width: 75vw;
-  margin: 4em auto;
-  line-height: inherit;
-} */
-article {
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 2px;
-  box-sizing: border-box;
-  background-color: white;
-  box-shadow: 0 1ex 1em rgba(0, 0, 0, 0.3);
-}
-code {
-  font-family: monospace;
-  display: inline-block;
-  padding: 0.5ex 1ch 0.25ex 1ch;
-  background-color: #ccc;
-  border-radius: 1ex;
-  margin: 0 0.5ch;
-}
-article + article {
-  margin-top: 4em;
-}
-article section {
-  margin: 2em;
-}
-article > section > h2 {
-  font-family: 'Lato';
-  font-weight: 800;
-  font-size: 1.3em;
-  margin-bottom: 0.8em;
-}
-article > section > p {
-  margin-bottom: 1em;
-  text-indent: 2ch;
-}
-article > section > p:first-child,
-article > section > h2 + p {
-  text-indent: 0;
-}
-        h1 {
-            text-align: center;
-            margin-bottom: 2;
-            padding-bottom: 2;
-        }
+  /* NAV BAR CSS PROPERTIES */
+  #floating-panel {
+      position: absolute fixed;
+      top: 15px;
+      left: 4.65%;
+      z-index: 5;
+      padding: 5px;
+      border: 1px solid white;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+  }
+  .btn-glass {
+    flex-grow: 1;
+    text-align: center;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    padding: 1em 2em;
+    font-family: Lato;
+    font-weight: 300;
+    border: 1px dotted transparent;
+    letter-spacing: 0.98pt;
+    text-transform: uppercase;
+    transition: background-position 2s cubic-bezier(0, 1, 0, 1), border-color 500ms, background-color 500ms;
+    position: relative;
+    background-attachment: fixed, scroll;
+    background-size: 100vw 100vh, cover;
+    background-position: center center, 0 0;
+    background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0.075) 10%, rgba(255, 255, 255, 0.075) 14%, rgba(255, 255, 255, 0.15) 14%, rgba(255, 255, 255, 0.15) 15%, rgba(255, 255, 255, 0.075) 17%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.075) 40%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0) 43%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.075) 60%, rgba(255, 255, 255, 0.075) 66%, rgba(255, 255, 255, 0.15) 66%, rgba(255, 255, 255, 0.075) 70%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%), radial-gradient(ellipse farthest-corner, transparent, rgba(0, 0, 0, 0.2) 110%);
+  }
+  .btn-glass:hover {
+    background-position: -100vw 0, 0 0;
+  }
+  .btn-glass:active {
+    background-position: -75vw 0, 0 0;
+    border-style: solid;
+  }
+  .nav-light {
+    background-color: white;
+  }
+  .nav-light .btn-glass {
+    color: #585858;
+    background-color: rgba(17, 17, 17, 0);
+  }
+  .nav-light .btn-glass:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #000000;
+    background-color: #111111;
+  }
+  .nav-light .btn-glass:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(17, 17, 17, 0.5);
+  }
+  .nav-light .btn-glass.btn-primary {
+    color: #6ab1d1;
+    background-color: rgba(42, 143, 189, 0);
+  }
+  .nav-light .btn-glass.btn-primary:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #1c607e;
+    background-color: #2A8FBD;
+  }
+  .nav-light .btn-glass.btn-primary:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(42, 143, 189, 0.5);
+  }
+  .nav-light .btn-glass.btn-success {
+    color: #a5c75f;
+    background-color: rgba(127, 175, 27, 0);
+  }
+  .nav-light .btn-glass.btn-success:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #4f6d11;
+    background-color: #7FAF1B;
+  }
+  .nav-light .btn-glass.btn-success:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(127, 175, 27, 0.5);
+  }
+  .nav-light .btn-glass.btn-warning {
+    color: #fccd69;
+    background-color: rgba(251, 184, 41, 0);
+  }
+  .nav-light .btn-glass.btn-warning:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #d49104;
+    background-color: #FBB829;
+  }
+  .nav-light .btn-glass.btn-warning:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(251, 184, 41, 0.5);
+  }
+  .nav-light .btn-glass.btn-danger {
+    color: #f56558;
+    background-color: rgba(240, 35, 17, 0);
+  }
+  .nav-light .btn-glass.btn-danger:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #aa180b;
+    background-color: #F02311;
+  }
+  .nav-light .btn-glass.btn-danger:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(240, 35, 17, 0.5);
+  }
+  .nav-light .btn-glass.btn-info {
+    color: #98e9f0;
+    background-color: rgba(108, 223, 234, 0);
+  }
+  .nav-light .btn-glass.btn-info:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: #29d0e0;
+    background-color: #6CDFEA;
+  }
+  .nav-light .btn-glass.btn-info:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(108, 223, 234, 0.5);
+  }
+  .nav-dark {
+    background-color: #444;
+  }
+  .nav-dark .btn-glass {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(17, 17, 17, 0);
+  }
+  .nav-dark .btn-glass:hover {
+    border-color: #000000;
+    background-color: #111111;
+  }
+  .nav-dark .btn-glass:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(17, 17, 17, 0.5);
+  }
+  .nav-dark .btn-glass.btn-primary {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(42, 143, 189, 0);
+  }
+  .nav-dark .btn-glass.btn-primary:hover {
+    border-color: #1c607e;
+    background-color: #2A8FBD;
+  }
+  .nav-dark .btn-glass.btn-primary:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(42, 143, 189, 0.5);
+  }
+  .nav-dark .btn-glass.btn-success {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(127, 175, 27, 0);
+  }
+  .nav-dark .btn-glass.btn-success:hover {
+    border-color: #4f6d11;
+    background-color: #7FAF1B;
+  }
+  .nav-dark .btn-glass.btn-success:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(127, 175, 27, 0.5);
+  }
+  .nav-dark .btn-glass.btn-warning {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(251, 184, 41, 0);
+  }
+  .nav-dark .btn-glass.btn-warning:hover {
+    border-color: #d49104;
+    background-color: #FBB829;
+  }
+  .nav-dark .btn-glass.btn-warning:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(251, 184, 41, 0.5);
+  }
+  .nav-dark .btn-glass.btn-danger {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(240, 35, 17, 0);
+  }
+  .nav-dark .btn-glass.btn-danger:hover {
+    border-color: #aa180b;
+    background-color: #F02311;
+  }
+  .nav-dark .btn-glass.btn-danger:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(240, 35, 17, 0.5);
+  }
+  .nav-dark .btn-glass.btn-info {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(108, 223, 234, 0);
+  }
+  .nav-dark .btn-glass.btn-info:hover {
+    border-color: #29d0e0;
+    background-color: #6CDFEA;
+  }
+  .nav-dark .btn-glass.btn-info:active {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 1em 0.5ex rgba(108, 223, 234, 0.5);
+  }
+  nav.btn-bar {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  :root {
+    font-family: 'Open Sans', sans;
+    font-size: 11pt;
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/grit-fs8.png), radial-gradient(ellipse farthest-corner, #555, #999);
+  }
+  article {
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 1ex 1em rgba(0, 0, 0, 0.3);
+  }
+  code {
+    font-family: monospace;
+    display: inline-block;
+    padding: 0.5ex 1ch 0.25ex 1ch;
+    background-color: #ccc;
+    border-radius: 1ex;
+    margin: 0 0.5ch;
+  }
+  article + article {
+    margin-top: 4em;
+  }
+  article section {
+    margin: 2em;
+  }
+  article > section > h2 {
+    font-family: 'Lato';
+    font-weight: 800;
+    font-size: 1.3em;
+    margin-bottom: 0.8em;
+  }
+  article > section > p {
+    margin-bottom: 1em;
+    text-indent: 2ch;
+  }
+  article > section > p:first-child,
+  article > section > h2 + p {
+    text-indent: 0;
+  }
+  h1 {
+      text-align: center;
+      margin-bottom: 2;
+      padding-bottom: 2;
+  }
     </style>
 </head>
 <h1>
     Tag Your Spots
 </h1>
-
+<!-- NAV BAR HTML-->
 <body>
     <div id="floating-panel" class= "btn-bar nav-dark"style="margin-top: 0px">
         <input onclick="clearMarkers();" type=button class="btn btn-glass btn-primary" value="Hide Markers">
         <input onclick="showMarkers();" type=button class="btn btn-glass btn-success" value="Show All Markers">
         <input onclick="deleteMarkers();" type=button class="btn btn-glass btn-danger" value="Delete Markers">
     </div>
+<!--Places API, SEARCH BAR-->
     <input id="pac-input" class="controls" type="text" placeholder="Search A Location">
+<!--MAPS API-->
     <div id="map"></div>
     <script>
         var lati;
@@ -351,16 +337,18 @@ article > section > h2 + p {
         var map;
         var markers = [];
         function initMap() {
+          //MAP INITIALLY CENTERED AROUND TORONTO
             var haightAshbury = { lat: 43.6532, lng: -79.3832 };
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
                 center: haightAshbury,
                 mapTypeId: 'terrain'
             });
+            //ADD MARKER WHEN CLICKED ON MAP
             map.addListener('click', function (event) {
                 addMarker(event.latLng);
             });
-            
+            //SEARCH BAR INPUT VARIABLES
             var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
@@ -407,7 +395,7 @@ article > section > h2 + p {
                 icon: iconBase + 'casa%20marker.png'
             },
         }
-        
+        //ADD MARKER FUNCTION
         function addMarker(location) {
           
             var marker = new google.maps.Marker({
@@ -418,16 +406,18 @@ article > section > h2 + p {
                 map: map
             });
             markers.push(marker);
+            //STORE LAT LNG POSITION IN VAR
             var lati = marker.getPosition().lat();
             var lngi = marker.getPosition().lng();
             console.log(lati, lngi);
-            //AJAX
+            //AJAX - SEND LAT LNG TO DATABASE
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "map.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("lat=" + lati + "&long=" + lngi );
             
         }
+        //NAV BAR FUNCTIONS
         function setMapOnAll(map) {
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
@@ -449,7 +439,7 @@ article > section > h2 + p {
             window.location.href="banner.html";
         }
     </script>
-
+    <!-- ANIMATED SUBMIT MARKERS BUTTON -->
     <div class="download-button-container">
 
         <button onclick="setTimeout(submitfunction, 5500)" class="download-button" style="margin: 0px 0px 100px 0px; position:relative">

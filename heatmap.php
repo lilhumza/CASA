@@ -1,4 +1,5 @@
 <?php
+//Acessing Database to retrieve Lat Lng Values
 $servername = "localhost";
 $username = "id5480653_humzasqldatabase";
 $password = "humzarocks";
@@ -23,6 +24,7 @@ if ($result->num_rows > 0) {
     }
    
 } else {
+  // Didn't get Var from Database
     echo "0 results";
 }
 $conn->close();
@@ -45,6 +47,7 @@ $conn->close();
         margin: 0;
         padding: 0;
       }
+      /* NAV BAR - CSS Properties */
       #floating-panel {
         position: absolute;
         top: 10px;
@@ -271,14 +274,9 @@ $conn->close();
       font-size: 11pt;
       line-height: 1.6;
       min-height: 100vh;
-      /* background-attachment: fixed, scroll; */
       background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/grit-fs8.png), radial-gradient(ellipse farthest-corner, #555, #999);
     }
-    /* body {
-      width: 75vw;
-      margin: 4em auto;
-      line-height: inherit;
-    } */
+   
     article {
       padding: 0;
       border: 2px solid transparent;
@@ -323,6 +321,7 @@ $conn->close();
     </style>
   </head>
 
+        <!-- Navigation Bar HTML-->
   <body>
     <div id="floating-panel" class= "btn-bar nav-light" >
       <button class="btn btn-glass btn-primary" onclick="toggleHeatmap()">Toggle Heatmap</button>
@@ -333,8 +332,8 @@ $conn->close();
     <div id="map"></div>
     <script>
       // This example requires the Visualization library. Include the libraries=visualization
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+      // parameter when you first load the API.
+      //SETUP HEATMAP
       var map, heatmap;
       
       function initMap() {
@@ -349,6 +348,7 @@ $conn->close();
           map: map
         });
       }
+      //NAV BAR FUNCTIONS CODE
       function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
       }
@@ -377,22 +377,18 @@ $conn->close();
       function changeOpacity() {
         heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
       }
-      
+    
+    //Assign Database LAT LNG Values to Local VAR
 	  var latitude = <?php echo json_encode($lati)?>;
       var longitude = <?php echo json_encode($lngi)?>;
-	  
-      // Heatmap data: 500 Points
       function getPoints() {
-      
+    //ADD POINT TO HEATMAP  
 	  var dat = [];
 	  
       for (var i=0; i < latitude.length; i++){
 		  dat.push(new google.maps.LatLng(latitude[i], longitude[i]));
       console.log(latitude[i] , longitude[i]);
-	    }
-		  
-        
-      
+	    }      
         return dat;
       }
       
